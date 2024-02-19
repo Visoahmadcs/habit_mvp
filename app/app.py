@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
+# Store the submitted form data in memory (you might want to use a database in a real application)
+form_data = []
+
 # Sample data for initial habits
 initial_habits = [
     {'name': 'Exercise', 'Sun': 'Yes', 'Mon': '', 'Tue': '', 'Wed': '', 'Thu': '', 'Fri': '', 'Sat':  ''},
@@ -13,6 +16,23 @@ initial_habits = [
 def index():
     return render_template('index.html', habits=initial_habits)
 
+
+@app.route('/submit_form', methods=['POST'])
+def submit_form():
+    # Extract form data
+    date = request.form.get('date')
+    # Extract other form fields as needed
+
+    # Create a dictionary to represent the form data
+    form_entry = {
+        'date': date,
+        # Add other form fields as needed
+    }
+
+    # Append the form data to the existing habit_data list
+    form_data.append(form_entry)
+
+    return render_template('index.html', habit_data=form_data)
 @app.route('/add_habit', methods=['POST'])
 def add_habit():
     habit_name = request.form['habitName']

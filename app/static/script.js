@@ -1,43 +1,85 @@
-function addHabit() {
-    // Get form input values
-    const habitName = document.getElementById('habitName').value;
-    const completionStatus = document.getElementById('completionStatus').value;
-    const quantitativeData = document.getElementById('quantitativeData').value;
+// static/script.js
 
-    // Get the table
-    const table = document.getElementById('habitTable');
 
-    // Create a new row
-    const newRow = table.insertRow();
+let selectedCell;
+document.addEventListener('DOMContentLoaded', function() {
+    updateDatesAndTable();
+});
 
-    // Add cells to the new row
-    const habitCell = newRow.insertCell(0);
-    habitCell.innerHTML = habitName;
+function updateDatesAndTable() {
+    // Get the current date
+    const currentDate = new Date();
 
-    // Add cells for each weekday (initialize as empty)
-    for (let i = 0; i < 4; i++) {
-        const weekdayCell = newRow.insertCell(i + 1);
-        weekdayCell.innerHTML = '';
+    // Get the header row
+    const dateHeaderRow = document.getElementById('dateHeaderRow');
+
+    // Dynamically generate table headers with dates for the next 7 days
+    for (let i = 0; i < 7; i++) {
+        const nextDate = new Date(currentDate);
+        nextDate.setDate(currentDate.getDate() + i);
+        const formattedDate = formatDate(nextDate);
+        dateHeaderRow.innerHTML += `<th>${formattedDate}</th>`;
     }
 
-    // Update the cell for the corresponding weekday based on the completion status
-    switch (completionStatus) {
-        case 'Yes':
-            // Use the second column (Monday) as an example, you can modify based on your needs
-            const completionCell = newRow.cells[2];
-            completionCell.innerHTML = `Yes (${quantitativeData})`;
-            completionCell.classList.add('completed');
-            break;
-        case 'No':
-            // Use the third column (Tuesday) as an example, you can modify based on your needs
-            const noCompletionCell = newRow.cells[3];
-            noCompletionCell.innerHTML = 'No';
-            break;
-        // Add more cases for other completion statuses or weekdays as needed
-    }
-
-    // Clear the form fields
-    document.getElementById('habitName').value = '';
-    document.getElementById('completionStatus').value = 'Yes';
-    document.getElementById('quantitativeData').value = '';
+    // Call a function to update the habit data in the table (you need to implement this function)
+    // updateTableWithHabitData();
 }
+
+function formatDate(date) {
+    const options = { weekday: 'short', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
+
+function updateTableWithHabitData() {
+    // Implement this function to populate the habit data in the table based on the selected date
+    // You may need to fetch data from your server or use local data
+}
+
+function openModal(cell) {
+    // Store the selected cell
+    selectedCell = cell;
+
+    // Get the habit name from the first cell of the row
+    const habitName = cell.parentNode.cells[0].innerHTML;
+
+    // Set the habit name in the modal
+    document.getElementById('modalHabitName').innerHTML = habitName;
+
+    // Display the modal
+    const modal = document.getElementById('habitModal');
+    modal.style.display = 'block';
+}
+
+function closeModal() {
+    // Reset the selected cell
+    selectedCell = null;
+
+    // Hide the modal
+    const modal = document.getElementById('habitModal');
+    modal.style.display = 'none';
+}
+
+function submitHabitModal() {
+    if (selectedCell) {
+        // Get form input values
+        const habitStatus = document.getElementById('habitStatus').value;
+        const quantitativeData = document.getElementById('modalQuantitativeData').value;
+
+        // Update the selected cell with the habit information
+        selectedCell.innerHTML = `${habitStatus} ${quantitativeData}`;
+
+        // Close the modal
+        closeModal();
+    }
+}
+
+// Add event listeners to table cells
+const tableBody = document.getElementById('habitTableBody');
+tableBody.addEventListener('click', function(event) {
+    const clickedCell = event.target;
+
+    // Check if a cell was clicked (excluding the header cells)
+    if (clickedCell.tagName === 'TD') {
+        openModal(clickedCell);
+    }
+});

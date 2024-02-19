@@ -12,42 +12,20 @@
             <h1>Habit Tracker</h1>
         </header>
         <main>
-            <!-- Habit input form -->
-            <form id="habitForm">
-                <label for="habitName">Habit Name:</label>
-                <input type="text" id="habitName" name="habitName" required>
 
-                <label for="completionStatus">Completion Status:</label>
-                <select id="completionStatus" name="completionStatus" required>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
-
-                <label for="quantitativeData">Quantitative Data:</label>
-                <input type="text" id="quantitativeData" name="quantitativeData">
-
-                <button type="button" onclick="addHabit()">Add Habit</button>
-            </form>
-
+            <div id="dateHeader"></div>
             <!-- Habit tracking table -->
             <table class="habit-table" id="habitTable">
                 <thead>
-                    <tr>
-                        <th></th>
-                        <th>Sun</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                        <!-- Add more weekday columns if needed -->
+                    <tr id="dateHeaderRow">
+                        <th>Habit Name</th>
+                        <!-- Date headers will be dynamically added here -->
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="habitTableBody">
                     <tr>
                         <td>Exercise</td>
-                        <td class="completed">Yes</td>
+                        <td class="completed">Y</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -70,7 +48,7 @@
                     <tr>
                         <td>Meditate</td>
                         <td></td>
-                        <td class="completed">No</td>
+                        <td class="completed">N</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -81,6 +59,30 @@
                     <!-- Add more rows for each habit -->
                 </tbody>
             </table>
+
+            <!-- Your new form for submitting daily activities -->
+
+            <div id="habitModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2 id="modalHabitName"></h2>
+                    <form id="habitModalForm">
+                        <!-- Add fields for habit information (Yes, No, Count, etc.) -->
+                        <label for="habitStatus">Completion Status:</label>
+                        <select id="habitStatus" name="habitStatus" required>
+                            <option value="Y">Y</option>
+                            <option value="N">N</option>
+                        </select>
+            
+                        <label for="quantitativeData">Quantitative Data:</label>
+                        <input type="text" id="modalQuantitativeData" name="modalQuantitativeData">
+            
+                        <button type="button" onclick="submitHabitModal()">Submit</button>
+                    </form>
+                </div>
+            </div>
+            
+       
         </main>
         <footer>
             <!-- Footer content -->
