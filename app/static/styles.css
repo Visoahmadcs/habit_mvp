@@ -1,0 +1,35 @@
+/* Add styles for the habit table */
+.habit-table {
+    width: 100%;
+    border-collapse: none;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    border-radius: 10%;
+    padding: 10px;
+    text-align: center;
+}
+
+.completed {
+    background-color: #2ea44f; /* Green for completed */
+}
+
+/* Responsive form styles */
+#habitForm {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+#habitForm label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#habitForm input,
+#habitForm select,
+#habitForm button {
+    width: 100%;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/styles.css">
+    <title>Habit Tracker</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Habit Tracker</h1>
+        </header>
+        <main>
+            <!-- Habit input form -->
+            <form id="habitForm">
+                <label for="habitName">Habit Name:</label>
+                <input type="text" id="habitName" name="habitName" required>
+
+                <label for="completionStatus">Completion Status:</label>
+                <select id="completionStatus" name="completionStatus" required>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+
+                <label for="quantitativeData">Quantitative Data:</label>
+                <input type="text" id="quantitativeData" name="quantitativeData">
+
+                <button type="button" onclick="addHabit()">Add Habit</button>
+            </form>
+
+            <!-- Habit tracking table -->
+            <table class="habit-table" id="habitTable">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                        <!-- Add more weekday columns if needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Exercise</td>
+                        <td class="completed">Yes</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <!-- Add more cells for each weekday -->
+                    </tr>
+                    <tr>
+                        <td>Read</td>
+                        <td class="completed">10</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <!-- Add more cells for each weekday -->
+                    </tr>
+                    <tr>
+                        <td>Meditate</td>
+                        <td></td>
+                        <td class="completed">No</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <!-- Add more cells for each weekday -->
+                    </tr>
+                    <!-- Add more rows for each habit -->
+                </tbody>
+            </table>
+        </main>
+        <footer>
+            <!-- Footer content -->
+        </footer>
+    </div>
+    <script src="static/script.js"></script>
+</body>
+</html>
